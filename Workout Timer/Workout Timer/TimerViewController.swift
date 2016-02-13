@@ -13,6 +13,7 @@ class TimerViewController : UIViewController {
     let synth = AVSpeechSynthesizer()
     let numberFormatter = NSNumberFormatter()
     var duration = 0
+    var countdownDuration = 10
     var timer : NSTimer?
 
     @IBOutlet var timerLabel: UILabel!
@@ -24,7 +25,7 @@ class TimerViewController : UIViewController {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.timerLabel.text = self.formattedTime()
+        self.timerLabel.text = "\(self.countdownDuration)"
         self.startTimer()
     }
 
@@ -33,7 +34,24 @@ class TimerViewController : UIViewController {
             t.invalidate()
         }
 
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerAction", userInfo: nil, repeats: true)
+        self.countdownDuration++
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "countDown", userInfo: nil, repeats: true)
+    }
+
+    func countDown() {
+        self.countdownDuration--
+        if self.countdownDuration == 0 {
+            self.timerLabel.text = self.formattedTime()
+            self.timer?.invalidate()
+            self.say("go")
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "timerAction", userInfo: nil, repeats: true)
+        } else {
+            self.timerLabel.text = "\(self.countdownDuration)"
+        }
+
+        if self.countdownDuration > 0 {
+            saySomethingForDuration(self.countdownDuration)
+        }
     }
 
     func timerAction() {
@@ -47,12 +65,17 @@ class TimerViewController : UIViewController {
 
         if self.duration == 0 {
             self.say("done")
-        } else if self.duration <= 10 {
-            if let text = self.numberFormatter.stringFromNumber(self.duration) {
+        } else {
+            self.saySomethingForDuration(self.duration)
+        }
+    }
+
+    func saySomethingForDuration(duration: Int) {
+        if duration <= 10 {
+            if let text = self.numberFormatter.stringFromNumber(duration) {
                 self.say(text)
             }
         }
-
     }
 
     func formattedTime() -> String {
