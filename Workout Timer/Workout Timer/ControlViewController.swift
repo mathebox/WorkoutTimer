@@ -9,17 +9,29 @@
 import UIKit
 
 class ControlViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    let durationKey = "durationKey"
 
     @IBOutlet var timePicker: UIPickerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        var duration = 10*60
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let lastDuration = defaults.integerForKey(self.durationKey) as Int?
+        {
+            if lastDuration > 0 {
+                duration = lastDuration
+            }
+        }
+
+        self.timePicker.selectRow(duration/60, inComponent: 0, animated: false)
+        self.timePicker.selectRow(duration%60, inComponent: 2, animated: false)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let timerVC = segue.destinationViewController as? TimerViewController {
-            var duration = self.timePicker.selectedRowInComponent(0)*60
-            duration += self.timePicker.selectedRowInComponent(2)
+            let duration = self.timePicker.selectedRowInComponent(0)*60 + self.timePicker.selectedRowInComponent(2)
             timerVC.duration = duration
         }
     }
@@ -74,7 +86,11 @@ class ControlViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         return 100
     }
 
-
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let duration = self.timePicker.selectedRowInComponent(0)*60 + self.timePicker.selectedRowInComponent(2)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setInteger(duration, forKey: self.durationKey)
+    }
 
 }
 
