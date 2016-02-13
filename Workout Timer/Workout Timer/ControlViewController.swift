@@ -16,9 +16,12 @@ class ControlViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         super.viewDidLoad()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let timerVC = segue.destinationViewController as? TimerViewController {
+            var duration = self.timePicker.selectedRowInComponent(0)*60
+            duration += self.timePicker.selectedRowInComponent(2)
+            timerVC.duration = duration
+        }
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

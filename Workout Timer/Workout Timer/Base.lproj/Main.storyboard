@@ -80,7 +80,23 @@
                     <view key="view" contentMode="scaleToFill" id="z7k-Vm-Y8Y">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNd-jq-tog">
+                                <rect key="frame" x="20" y="250" width="560" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="vls-bb-pRq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="60"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SNd-jq-tog" firstAttribute="centerY" secondItem="z7k-Vm-Y8Y" secondAttribute="centerY" id="1fa-8D-ZwB"/>
+                            <constraint firstItem="SNd-jq-tog" firstAttribute="trailing" secondItem="z7k-Vm-Y8Y" secondAttribute="trailingMargin" id="WNZ-dU-V28"/>
+                            <constraint firstItem="SNd-jq-tog" firstAttribute="leading" secondItem="z7k-Vm-Y8Y" secondAttribute="leadingMargin" id="dJM-fr-ofW"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KfE-QE-xM2">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MSS-Sa-PvP">
@@ -89,6 +105,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="timerLabel" destination="SNd-jq-tog" id="DzU-vu-bJ7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Coc-in-HvY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
