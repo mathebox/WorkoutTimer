@@ -13,6 +13,7 @@
 		5018133E1C6F38AB00492270 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5018133D1C6F38AB00492270 /* Assets.xcassets */; };
 		501813411C6F38AB00492270 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5018133F1C6F38AB00492270 /* LaunchScreen.storyboard */; };
 		501813491C6F576600492270 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501813481C6F576600492270 /* TimerViewController.swift */; };
+		5018134B1C6F703100492270 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5018134A1C6F703100492270 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		501813401C6F38AB00492270 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		501813421C6F38AB00492270 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		501813481C6F576600492270 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		5018134A1C6F703100492270 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5018134B1C6F703100492270 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +43,7 @@
 		5018132A1C6F38AA00492270 = {
 			isa = PBXGroup;
 			children = (
+				5018134A1C6F703100492270 /* AVFoundation.framework */,
 				501813351C6F38AA00492270 /* Workout Timer */,
 				501813341C6F38AA00492270 /* Products */,
 			);
