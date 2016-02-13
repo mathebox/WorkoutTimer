@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		501813371C6F38AB00492270 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501813361C6F38AB00492270 /* AppDelegate.swift */; };
-		501813391C6F38AB00492270 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501813381C6F38AB00492270 /* ViewController.swift */; };
+		501813391C6F38AB00492270 /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501813381C6F38AB00492270 /* ControlViewController.swift */; };
 		5018133C1C6F38AB00492270 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5018133A1C6F38AB00492270 /* Main.storyboard */; };
 		5018133E1C6F38AB00492270 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5018133D1C6F38AB00492270 /* Assets.xcassets */; };
 		501813411C6F38AB00492270 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5018133F1C6F38AB00492270 /* LaunchScreen.storyboard */; };
+		501813491C6F576600492270 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501813481C6F576600492270 /* TimerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		501813331C6F38AA00492270 /* Workout Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Workout Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		501813361C6F38AB00492270 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		501813381C6F38AB00492270 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		501813381C6F38AB00492270 /* ControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
 		5018133B1C6F38AB00492270 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5018133D1C6F38AB00492270 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		501813401C6F38AB00492270 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		501813421C6F38AB00492270 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		501813481C6F576600492270 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				501813361C6F38AB00492270 /* AppDelegate.swift */,
-				501813381C6F38AB00492270 /* ViewController.swift */,
+				501813381C6F38AB00492270 /* ControlViewController.swift */,
+				501813481C6F576600492270 /* TimerViewController.swift */,
 				5018133A1C6F38AB00492270 /* Main.storyboard */,
 				5018133D1C6F38AB00492270 /* Assets.xcassets */,
 				5018133F1C6F38AB00492270 /* LaunchScreen.storyboard */,
@@ -96,6 +99,7 @@
 				TargetAttributes = {
 					501813321C6F38AA00492270 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 3YVY2RHHVQ;
 					};
 				};
 			};
@@ -135,7 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				501813391C6F38AB00492270 /* ViewController.swift in Sources */,
+				501813391C6F38AB00492270 /* ControlViewController.swift in Sources */,
+				501813491C6F576600492270 /* TimerViewController.swift in Sources */,
 				501813371C6F38AB00492270 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,9 +254,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Workout Timer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.maxbothe.WorkoutTimer.Workout-Timer";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.maxbothe.Workout-Timer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -260,9 +266,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Workout Timer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.maxbothe.WorkoutTimer.Workout-Timer";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.maxbothe.Workout-Timer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
