@@ -28,8 +28,23 @@ class TimerViewController : UIViewController, TimerDelegate {
     }
 
     @IBAction func cancelTimer(sender: AnyObject) {
-        self.timer.stop()
-        self.navigationController?.popViewControllerAnimated(true)
+        if self.timer.isRunning {
+            let alertController = UIAlertController(title: "Stop Timer", message: "Do you really want to stop the timer?", preferredStyle: .Alert)
+
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            alertController.addAction(cancelAction)
+
+            let destroyAction = UIAlertAction(title: "Stop", style: .Destructive) { (action) in
+                self.timer.stop()
+                self.navigationController?.popViewControllerAnimated(true)
+
+            }
+            alertController.addAction(destroyAction)
+
+            self.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
 
     func updateText(text: String) {

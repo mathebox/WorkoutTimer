@@ -104,7 +104,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KfE-QE-xM2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="MSS-Sa-PvP">
+                        <barButtonItem key="leftBarButtonItem" title="Stop" id="MSS-Sa-PvP">
                             <connections>
                                 <action selector="cancelTimer:" destination="oMS-mc-3Pk" id="jTw-3Z-3gb"/>
                             </connections>

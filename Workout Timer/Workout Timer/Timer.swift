@@ -26,6 +26,9 @@ class Timer : NSObject {
     }
     var countdownDuration = 10
     var timer : NSTimer?
+    var isRunning : Bool {
+        return self.timer != nil
+    }
     var speechOption = TimerSpeechOption.None
     var delegate : TimerDelegate? {
         didSet {
@@ -90,6 +93,7 @@ class Timer : NSObject {
         if self.remainingDuration == 0 {
             self.delegate?.updateText("Done")
             self.timer?.invalidate()
+            self.timer = nil
         } else {
             self.delegate?.updateText(self.formattedDuration)
         }
