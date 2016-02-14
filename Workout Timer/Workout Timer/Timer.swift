@@ -18,10 +18,10 @@ protocol TimerDelegate {
 class Timer : NSObject {
     let synth = AVSpeechSynthesizer()
     let numberFormatter = NSNumberFormatter()
-    var oriinalDuration = 0
+    var remainingDuration = 0
     var duration = 0 {
         didSet {
-            self.oriinalDuration = self.duration
+            self.remainingDuration = self.duration
         }
     }
     var countdownDuration = 10
@@ -37,7 +37,7 @@ class Timer : NSObject {
         }
     }
     var formattedDuration: String {
-        return String(format: "%d:%02d", self.duration/60, self.duration%60)
+        return String(format: "%d:%02d", self.remainingDuration/60, self.remainingDuration%60)
     }
 
     override init() {
@@ -86,18 +86,18 @@ class Timer : NSObject {
     }
 
     func timerAction() {
-        self.duration--
-        if self.duration == 0 {
+        self.remainingDuration--
+        if self.remainingDuration == 0 {
             self.delegate?.updateText("Done")
             self.timer?.invalidate()
         } else {
             self.delegate?.updateText(self.formattedDuration)
         }
 
-        if self.duration == 0 {
+        if self.remainingDuration == 0 {
             self.say("done")
         } else {
-            self.saySomethingForDuration(self.duration)
+            self.saySomethingForDuration(self.remainingDuration)
         }
     }
 
@@ -114,6 +114,18 @@ class Timer : NSObject {
                 } else {
                     if let text = self.numberFormatter.stringFromNumber(minutes) {
                         self.say("\(text) minutes to go")
+                    }
+                }
+            }
+        } else if self.speechOption == .Past {
+            let timePast = self.duration - self.remainingDuration
+            if timePast % 60 == 0 {
+                let minutes = timePast / 60
+                if minutes == 1 {
+                    self.say("1 minute")
+                } else {
+                    if let text = self.numberFormatter.stringFromNumber(minutes) {
+                        self.say("\(text) minutes")
                     }
                 }
             }
