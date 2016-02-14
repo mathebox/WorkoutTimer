@@ -29,7 +29,11 @@ class Timer : NSObject {
     var speechOption = TimerSpeechOption.None
     var delegate : TimerDelegate? {
         didSet {
-            self.delegate?.updateText("\(self.countdownDuration)")
+            if self.countdownDuration > 0 {
+                self.delegate?.updateText("\(self.countdownDuration)")
+            } else {
+                self.delegate?.updateText("")
+            }
         }
     }
     var formattedDuration: String {
