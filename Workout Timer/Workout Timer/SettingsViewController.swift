@@ -8,8 +8,15 @@
 
 import UIKit
 
+enum TimerSpeechOptions : String {
+    case None = "None"
+    case ToGo = "To Go"
+    static let allValues = [None, ToGo]
+}
+
 class SettingsViewController : UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     let counddownDurationKey = "countdown-duration"
+    let timerSpeechKey = "timer-speech"
     var countdownPickerIndexPath : NSIndexPath?
 
     @IBAction func dismissSettings(sender: AnyObject) {
@@ -18,38 +25,58 @@ class SettingsViewController : UITableViewController, UIPickerViewDataSource, UI
 
     // MARK: UITableView
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.countdownPickerIndexPath != nil {
-            return 2
+        if section == 0 {
+            if self.countdownPickerIndexPath != nil {
+                return 2
+            }
+            return 1
         }
-        return 1
+        return TimerSpeechOptions.allValues.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cellId = "countdown-time"
-        if self.countdownPickerIndexPath == indexPath {
-            cellId = "countdown-picker"
+        var cellId : String
+        if indexPath.section == 0{
+            if self.countdownPickerIndexPath == indexPath {
+                cellId = "countdown-picker"
+            } else {
+                cellId = "countdown-time"
+            }
+        } else {
+            cellId = "timer-speech"
         }
 
         let cell = tableView.dequeueReusableCellWithIdentifier(cellId)
 
+        let defaults = NSUserDefaults.standardUserDefaults()
         if cellId == "countdown-time" {
-            let defaults = NSUserDefaults.standardUserDefaults()
-            if let duration = defaults.integerForKey(self.counddownDurationKey) as Int?
-            {
+            if let duration = defaults.integerForKey(self.counddownDurationKey) as Int? {
                 var durationText = "\(duration) sec"
                 if duration == 0 {
                     durationText = "disabled"
                 }
                 cell?.detailTextLabel?.text = durationText
             }
-
+        } else if cellId == "timer-speech" {
+            let text = TimerSpeechOptions.allValues[indexPath.row].rawValue
+            cell?.textLabel?.text = text
+            if defaults.stringForKey(self.timerSpeechKey) == text {
+                cell?.accessoryType = .Checkmark
+            }
         }
 
         return cell!
+    }
+
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Countdown"
+        }
+        return "Timer Speech Options"
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -62,6 +89,20 @@ class SettingsViewController : UITableViewController, UIPickerViewDataSource, UI
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath == NSIndexPath(forRow: 0, inSection: 0) {
             self.displayInlineDatePickerForRowAtIndexPath(indexPath)
+        } else if indexPath.section == 1 {
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if let oldOption = defaults.stringForKey(self.timerSpeechKey) {
+                if let value = TimerSpeechOptions(rawValue: oldOption) {
+                    if let row = TimerSpeechOptions.allValues.indexOf(value) {
+                        let indexPath = NSIndexPath(forRow: row, inSection: 1)
+                        self.tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .None
+                    }
+                }
+            }
+            let newOption = TimerSpeechOptions.allValues[indexPath.row].rawValue
+            defaults.setObject(newOption, forKey: self.timerSpeechKey)
+            defaults.synchronize()
+            tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .Checkmark
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
