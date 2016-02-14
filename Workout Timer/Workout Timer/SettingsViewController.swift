@@ -13,7 +13,8 @@ enum TimerSpeechOption : String {
     case ToGo = "To Go"
     case Past = "Past"
     case Combined = "Combined"
-    static let allValues = [None, ToGo, Past, Combined]
+    case Smart = "Smart"
+    static let allValues = [None, ToGo, Past, Combined, Smart]
 }
 
 class SettingsViewController : UITableViewController, UIPickerViewDataSource, UIPickerViewDelegate {

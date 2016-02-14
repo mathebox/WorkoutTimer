@@ -127,22 +127,48 @@ class Timer : NSObject {
         }
     }
 
+    func sayHalves(duration: Int) {
+        if self.duration/2 == duration {
+            self.say("Halftime")
+        }
+    }
+
+    func sayThirds(duration: Int) {
+        let timePast = self.duration - duration
+        if timePast % (self.duration/3) == 0 {
+            let thirds = timePast/(self.duration/3)
+            if thirds == 1 {
+                self.say("one third")
+            } else {
+                if let text = numberFormatter.stringFromNumber(thirds) {
+                    self.say("\(text) thirds")
+                }
+            }
+        }
+    }
+
     func saySomethingForDuration(duration: Int) {
         if duration <= 10 {
             if let text = self.numberFormatter.stringFromNumber(duration) {
                 self.say(text)
             }
         } else if self.speechOption == .ToGo {
-            self.sayMinutesToGo(self.remainingDuration)
+            self.sayMinutesToGo(duration)
         } else if self.speechOption == .Past {
-            let timePast = self.duration - self.remainingDuration
+            let timePast = self.duration - duration
             self.sayMinutesPast(timePast)
         } else if self.speechOption == .Combined {
-            let timePast = self.duration - self.remainingDuration
+            let timePast = self.duration - duration
             if timePast > self.remainingDuration {
-                self.sayMinutesToGo(self.remainingDuration)
+                self.sayMinutesToGo(duration)
             } else {
                 self.sayMinutesPast(timePast)
+            }
+        } else if self.speechOption == .Smart {
+            if self.duration >= 3*60 {
+                self.sayThirds(duration)
+            } else if self.duration >= 1*60 {
+                self.sayHalves(duration)
             }
         }
     }
