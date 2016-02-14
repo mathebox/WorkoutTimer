@@ -101,33 +101,48 @@ class Timer : NSObject {
         }
     }
 
+    func sayMinutesToGo(duration: Int) {
+        if duration % 60 == 0 {
+            let minutes = duration / 60
+            if minutes == 1 {
+                self.say("1 minute to go")
+            } else {
+                if let text = self.numberFormatter.stringFromNumber(minutes) {
+                    self.say("\(text) minutes to go")
+                }
+            }
+        }
+    }
+
+    func sayMinutesPast(duration: Int) {
+        if duration % 60 == 0 {
+            let minutes = duration / 60
+            if minutes == 1 {
+                self.say("1 minute")
+            } else {
+                if let text = self.numberFormatter.stringFromNumber(minutes) {
+                    self.say("\(text) minutes")
+                }
+            }
+        }
+    }
+
     func saySomethingForDuration(duration: Int) {
         if duration <= 10 {
             if let text = self.numberFormatter.stringFromNumber(duration) {
                 self.say(text)
             }
         } else if self.speechOption == .ToGo {
-            if duration % 60 == 0 {
-                let minutes = duration / 60
-                if minutes == 1 {
-                    self.say("1 minute to go")
-                } else {
-                    if let text = self.numberFormatter.stringFromNumber(minutes) {
-                        self.say("\(text) minutes to go")
-                    }
-                }
-            }
+            self.sayMinutesToGo(self.remainingDuration)
         } else if self.speechOption == .Past {
             let timePast = self.duration - self.remainingDuration
-            if timePast % 60 == 0 {
-                let minutes = timePast / 60
-                if minutes == 1 {
-                    self.say("1 minute")
-                } else {
-                    if let text = self.numberFormatter.stringFromNumber(minutes) {
-                        self.say("\(text) minutes")
-                    }
-                }
+            self.sayMinutesPast(timePast)
+        } else if self.speechOption == .Combined {
+            let timePast = self.duration - self.remainingDuration
+            if timePast > self.remainingDuration {
+                self.sayMinutesToGo(self.remainingDuration)
+            } else {
+                self.sayMinutesPast(timePast)
             }
         }
     }
