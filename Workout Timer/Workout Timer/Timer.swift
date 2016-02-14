@@ -18,9 +18,15 @@ protocol TimerDelegate {
 class Timer : NSObject {
     let synth = AVSpeechSynthesizer()
     let numberFormatter = NSNumberFormatter()
-    var duration = 0
+    var oriinalDuration = 0
+    var duration = 0 {
+        didSet {
+            self.oriinalDuration = self.duration
+        }
+    }
     var countdownDuration = 10
     var timer : NSTimer?
+    var speechOption = TimerSpeechOptions.None
     var delegate : TimerDelegate? {
         didSet {
             self.delegate?.updateText("\(self.countdownDuration)")
@@ -36,6 +42,11 @@ class Timer : NSObject {
         let defaults = NSUserDefaults.standardUserDefaults()
         if let countdownDuration = defaults.integerForKey("countdown-duration") as Int? {
             self.countdownDuration = countdownDuration
+        }
+        if let speechOptionString = defaults.stringForKey("timer-speech") as String? {
+            if let speechOption = TimerSpeechOptions(rawValue: speechOptionString) {
+                self.speechOption = speechOption
+            }
         }
     }
 
@@ -90,6 +101,17 @@ class Timer : NSObject {
         if duration <= 10 {
             if let text = self.numberFormatter.stringFromNumber(duration) {
                 self.say(text)
+            }
+        } else if self.speechOption == .ToGo {
+            if duration % 60 == 0 {
+                let minutes = duration / 60
+                if minutes == 1 {
+                    self.say("1 minute to go")
+                } else {
+                    if let text = self.numberFormatter.stringFromNumber(minutes) {
+                        self.say("\(text) minutes to go")
+                    }
+                }
             }
         }
     }
