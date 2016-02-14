@@ -26,7 +26,7 @@ class Timer : NSObject {
     }
     var countdownDuration = 10
     var timer : NSTimer?
-    var speechOption = TimerSpeechOptions.None
+    var speechOption = TimerSpeechOption.None
     var delegate : TimerDelegate? {
         didSet {
             self.delegate?.updateText("\(self.countdownDuration)")
@@ -44,7 +44,7 @@ class Timer : NSObject {
             self.countdownDuration = countdownDuration
         }
         if let speechOptionString = defaults.stringForKey("timer-speech") as String? {
-            if let speechOption = TimerSpeechOptions(rawValue: speechOptionString) {
+            if let speechOption = TimerSpeechOption(rawValue: speechOptionString) {
                 self.speechOption = speechOption
             }
         }

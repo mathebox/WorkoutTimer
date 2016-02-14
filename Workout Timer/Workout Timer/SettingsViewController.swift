@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum TimerSpeechOptions : String {
+enum TimerSpeechOption : String {
     case None = "None"
     case ToGo = "To Go"
     static let allValues = [None, ToGo]
@@ -35,7 +35,7 @@ class SettingsViewController : UITableViewController, UIPickerViewDataSource, UI
             }
             return 1
         }
-        return TimerSpeechOptions.allValues.count
+        return TimerSpeechOption.allValues.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -62,7 +62,7 @@ class SettingsViewController : UITableViewController, UIPickerViewDataSource, UI
                 cell?.detailTextLabel?.text = durationText
             }
         } else if cellId == "timer-speech" {
-            let text = TimerSpeechOptions.allValues[indexPath.row].rawValue
+            let text = TimerSpeechOption.allValues[indexPath.row].rawValue
             cell?.textLabel?.text = text
             if defaults.stringForKey(self.timerSpeechKey) == text {
                 cell?.accessoryType = .Checkmark
@@ -92,14 +92,14 @@ class SettingsViewController : UITableViewController, UIPickerViewDataSource, UI
         } else if indexPath.section == 1 {
             let defaults = NSUserDefaults.standardUserDefaults()
             if let oldOption = defaults.stringForKey(self.timerSpeechKey) {
-                if let value = TimerSpeechOptions(rawValue: oldOption) {
-                    if let row = TimerSpeechOptions.allValues.indexOf(value) {
+                if let value = TimerSpeechOption(rawValue: oldOption) {
+                    if let row = TimerSpeechOption.allValues.indexOf(value) {
                         let indexPath = NSIndexPath(forRow: row, inSection: 1)
                         self.tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .None
                     }
                 }
             }
-            let newOption = TimerSpeechOptions.allValues[indexPath.row].rawValue
+            let newOption = TimerSpeechOption.allValues[indexPath.row].rawValue
             defaults.setObject(newOption, forKey: self.timerSpeechKey)
             defaults.synchronize()
             tableView.cellForRowAtIndexPath(indexPath)?.accessoryType = .Checkmark
