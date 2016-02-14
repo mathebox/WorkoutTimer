@@ -33,6 +33,10 @@ class Timer : NSObject {
     override init() {
         super.init()
         self.numberFormatter.numberStyle = NSNumberFormatterStyle.SpellOutStyle
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let countdownDuration = defaults.integerForKey("countdown-duration") as Int? {
+            self.countdownDuration = countdownDuration
+        }
     }
 
     func start() {

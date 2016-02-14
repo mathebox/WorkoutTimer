@@ -13,10 +13,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    func setDefaults() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let defaultPrefsURL = NSBundle.mainBundle().URLForResource("DefaultPreferences", withExtension: "plist") {
+            if let defaultPrefs = NSDictionary(contentsOfURL: defaultPrefsURL) as? [String : AnyObject] {
+                defaults.registerDefaults(defaultPrefs)
+                defaults.synchronize()
+            }
+        }
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         window?.tintColor = UIColor(white: 0.23, alpha: 1)
+        self.setDefaults()
         return true
     }
 

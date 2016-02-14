@@ -9,24 +9,19 @@
 import UIKit
 
 class ControlViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    let durationKey = "durationKey"
+    let durationKey = "timer-duration"
 
     @IBOutlet var timePicker: UIPickerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var duration = 10*60
         let defaults = NSUserDefaults.standardUserDefaults()
-        if let lastDuration = defaults.integerForKey(self.durationKey) as Int?
+        if let duration = defaults.integerForKey(self.durationKey) as Int?
         {
-            if lastDuration > 0 {
-                duration = lastDuration
-            }
+            self.timePicker.selectRow(duration/60, inComponent: 0, animated: false)
+            self.timePicker.selectRow(duration%60, inComponent: 2, animated: false)
         }
-
-        self.timePicker.selectRow(duration/60, inComponent: 0, animated: false)
-        self.timePicker.selectRow(duration%60, inComponent: 2, animated: false)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -90,6 +85,7 @@ class ControlViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let duration = self.timePicker.selectedRowInComponent(0)*60 + self.timePicker.selectedRowInComponent(2)
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(duration, forKey: self.durationKey)
+        defaults.synchronize()
     }
 
 }
