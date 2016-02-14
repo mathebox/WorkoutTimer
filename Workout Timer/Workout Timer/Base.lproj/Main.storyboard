@@ -35,7 +35,7 @@
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="elV-UW-rVP">
-                                <rect key="frame" x="20" y="260" width="560" height="80"/>
+                                <rect key="frame" x="20" y="254" width="560" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="nJd-9K-8qB"/>
                                 </constraints>
@@ -46,7 +46,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="elV-UW-rVP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6mG-dk-MWB"/>
+                            <constraint firstItem="elV-UW-rVP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-6" id="6mG-dk-MWB"/>
                             <constraint firstItem="Awm-gR-P0C" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="A7E-k3-VC9"/>
                             <constraint firstItem="Awm-gR-P0C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Dki-AW-2zs"/>
                             <constraint firstItem="elV-UW-rVP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="KEr-Fm-IOp"/>
